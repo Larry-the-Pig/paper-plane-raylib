@@ -148,7 +148,7 @@ void draw_map(GameState *const game_state)
             return;
         }
         uint32_t currentRow = game_state->map[i];
-        for (unsigned int j = 0; j < sizeof(uint16_t) * 8; j++)
+        for (unsigned int j = 0; j < MAP_WIDTH; j++)
         {
             /*
                 0x8000 is 1 with 15 zeros
@@ -173,16 +173,20 @@ void draw_map(GameState *const game_state)
                     j * SPRITE_SIZE,
                     i * SPRITE_SIZE - game_state->background_position * SPRITE_SIZE};
 
-                // if the bit to the left is 0, use the right facing ground sprite
-                if (!(currentRow & 0x4000))
+                // don't draw corner tiles on the edge of the screen
+                if (j != 0 && j != MAP_WIDTH - 1)
                 {
-                    ground_to_draw.x = 9 * SPRITE_SIZE;
-                }
+                    // if the bit to the left is 0, use the right facing ground sprite
+                    if (!(currentRow & 0x4000))
+                    {
+                        ground_to_draw.x = 9 * SPRITE_SIZE;
+                    }
 
-                // if the bit to the right is 0, use the left facing ground tile
-                if (!(currentRow & 0x10000))
-                {
-                    ground_to_draw.x = 7 * SPRITE_SIZE;
+                    // if the bit to the right is 0, use the left facing ground tile
+                    if (!(currentRow & 0x10000))
+                    {
+                        ground_to_draw.x = 7 * SPRITE_SIZE;
+                    }
                 }
 
                 DrawTextureRec(*game_state->sprite_sheet, ground_to_draw, tile_position, WHITE);
