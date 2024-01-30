@@ -7,11 +7,13 @@
 #include "paper.h"
 #include "constants.h"
 #include "map.h"
+#include "screens.h"
+#include "title_screen.h"
 
 #define FPS 60
 #define PIXEL_UPSCALE 4
 
-#define WINDOW_WIDTH MAP_WIDTH * SPRITE_SIZE
+#define WINDOW_WIDTH MAP_WIDTH *SPRITE_SIZE
 #define WINDOW_HEIGHT 10 * SPRITE_SIZE
 #define WINDOW_NAME "Paper Plane"
 
@@ -19,7 +21,8 @@ int main()
 {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
 
-    Texture2D sprite_sheet = LoadTexture("assets/sheet1.png");
+    Texture2D sprite_sheet = LoadTexture("assets/sheet.png");
+    Texture2D background = LoadTexture("assets/background.png");
 
     // Rectangle test = {0.0f, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
 
@@ -32,14 +35,17 @@ int main()
     {
         float deltaTime = GetFrameTime();
 
-        if (IsKeyPressed(KEY_LEFT))
+        if (!game_state->crash_flag)
         {
-            rotate_left(game_state->paper);
-        }
+            if (IsKeyPressed(KEY_LEFT))
+            {
+                rotate_left(game_state->paper);
+            }
 
-        if (IsKeyPressed(KEY_RIGHT))
-        {
-            rotate_right(game_state->paper);
+            if (IsKeyPressed(KEY_RIGHT))
+            {
+                rotate_right(game_state->paper);
+            }
         }
 
         if (IsKeyPressed(KEY_ENTER) && game_state->crash_flag)
@@ -55,9 +61,22 @@ int main()
 
         BeginDrawing();
 
-        ClearBackground(WHITE);
-        draw_map(game_state);
-        DrawTextureRec(sprite_sheet, game_state->paper->sprite_frame, Vector2Scale(game_state->paper->position, SPRITE_SIZE), WHITE);
+        switch (game_state->game_screen)
+        {
+        case TITLE:
+            draw_title_screen(game_state);
+            break;
+
+        case GAMEPLAY:
+            ClearBackground(WHITE);
+            DrawTexture(background, 0, 0, WHITE);
+            draw_map(game_state);
+            DrawTextureRec(sprite_sheet, game_state->paper->sprite_frame, Vector2Scale(game_state->paper->position, SPRITE_SIZE), WHITE);
+            break;
+
+        default:
+            break;
+        }
 
         EndDrawing();
     }

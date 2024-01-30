@@ -3,9 +3,10 @@
 #include "map.h"
 #include "constants.h"
 
-void init_map(uint16_t* map) {
+void init_map(uint16_t *map)
+{
     /*
-        this is all the map data same as 
+        this is all the map data same as
         the map from https://ticalc.org/archives/files/fileinfo/341/34139.html
         1: 8x8 tile exists on an 8x8 grid
         0: no 8x8 tile
@@ -132,16 +133,23 @@ void init_map(uint16_t* map) {
     map[118] = 0b0001111111111000;
 }
 
-void draw_map(GameState* const game_state) {
-    //float background_position = game_state->paper->position.y;
-    for(int i = game_state->background_position; i < game_state->background_position + 10; i++) {
+void draw_map(GameState *const game_state)
+{
+    // float background_position = game_state->paper->position.y;
+    for (int i = game_state->background_position; i < game_state->background_position + 10; i++)
+    {
         /*
-            using a u_int32_t here so that bits 
-            that have been shifted out can still 
+            using a u_int32_t here so that bits
+            that have been shifted out can still
             be read.
         */
+        if (i > MAP_HEIGHT - 1)
+        {
+            return;
+        }
         uint32_t currentRow = game_state->map[i];
-        for(unsigned int j = 0; j < sizeof(uint16_t) * 8; j++) {
+        for (unsigned int j = 0; j < sizeof(uint16_t) * 8; j++)
+        {
             /*
                 0x8000 is 1 with 15 zeros
                 00000000000000001000000000000000 - 0x8000
@@ -149,7 +157,7 @@ void draw_map(GameState* const game_state) {
                 using & will result in:
                 00000000000000001000000000000000
                 the above number will evaluate to true
-                
+
                 OR
 
                 00000000000000001000000000000000 - 0x8000
@@ -158,20 +166,22 @@ void draw_map(GameState* const game_state) {
                 00000000000000000000000000000000
                 the above number will result in false
             */
-            if(currentRow & 0x8000) {
+            if (currentRow & 0x8000)
+            {
                 Rectangle ground_to_draw = {8 * SPRITE_SIZE, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
                 Vector2 tile_position = {
                     j * SPRITE_SIZE,
-                    i * SPRITE_SIZE - game_state->background_position * SPRITE_SIZE
-                };
+                    i * SPRITE_SIZE - game_state->background_position * SPRITE_SIZE};
 
                 // if the bit to the left is 0, use the right facing ground sprite
-                if(!(currentRow & 0x4000)) {
+                if (!(currentRow & 0x4000))
+                {
                     ground_to_draw.x = 9 * SPRITE_SIZE;
                 }
 
                 // if the bit to the right is 0, use the left facing ground tile
-                if(!(currentRow & 0x10000)) {
+                if (!(currentRow & 0x10000))
+                {
                     ground_to_draw.x = 7 * SPRITE_SIZE;
                 }
 
