@@ -6,7 +6,7 @@ RAYLIBINC	= /usr/local/include/
 INCS = -I${RAYLIBINC} -Iinclude/
 LIBS = -L${RAYLIB} -lraylib
 
-CFLAGS   = -std=c99 -Wall -O2 ${INCS}
+CFLAGS   = -std=c99 -Wall -O3 ${INCS}
 LDFLAGS  = ${LIBS}
 CC = cc
 
