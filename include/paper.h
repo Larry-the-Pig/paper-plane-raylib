@@ -1,6 +1,5 @@
 #ifndef PAPER_H
 #define PAPER_H
-
 #include <raylib.h>
 
 #define PAPER_START_X 8

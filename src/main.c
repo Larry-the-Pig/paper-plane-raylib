@@ -3,15 +3,14 @@
 #include <stdint.h>
 #include <raylib.h>
 #include <raymath.h>
-#include "game_state.h"
-#include "paper.h"
+#include "global_state.h"
 #include "constants.h"
 #include "map.h"
 #include "screens.h"
-#include "title_screen.h"
+#include "gameplay_screen.h"
 
 #define FPS 60
-#define PIXEL_UPSCALE 4
+#define SPRITE_SIZE 32
 
 #define WINDOW_WIDTH MAP_WIDTH *SPRITE_SIZE
 #define WINDOW_HEIGHT 10 * SPRITE_SIZE
@@ -26,67 +25,35 @@ int main()
 
     // Rectangle test = {0.0f, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
 
-    GameState *game_state = malloc(sizeof(GameState));
-    game_state_init(game_state, &sprite_sheet);
+    GlobalState *global_state = malloc(sizeof(GlobalState));
+    GameplayScreen *gameplay_screen = malloc(sizeof(GameplayScreen));
+    global_state_init(global_state, &sprite_sheet, &background);
+    init_gameplay_screen(gameplay_screen);
 
     SetTargetFPS(FPS);
 
     while (!WindowShouldClose())
     {
-        float deltaTime = GetFrameTime();
+        global_state->delta_time = GetFrameTime();
 
-        if (!game_state->crash_flag)
-        {
-            if (IsKeyPressed(KEY_LEFT))
-            {
-                rotate_left(game_state->paper);
-            }
-
-            if (IsKeyPressed(KEY_RIGHT))
-            {
-                rotate_right(game_state->paper);
-            }
-        }
-
-        if (IsKeyPressed(KEY_ENTER) && game_state->crash_flag)
-        {
-            game_state_reinit(game_state);
-        }
-
-        if (!game_state->crash_flag)
-        {
-            update_position(game_state, deltaTime);
-            check_collision(game_state);
-        }
+        update_gameplay_screen(gameplay_screen, global_state);
 
         BeginDrawing();
 
-        switch (game_state->game_screen)
-        {
-        case TITLE:
-            draw_title_screen(game_state);
-            break;
-
-        case GAMEPLAY:
-            ClearBackground(WHITE);
-            DrawTexture(background, 0, 0, WHITE);
-            draw_map(game_state);
-            DrawTextureRec(sprite_sheet, game_state->paper->sprite_frame, Vector2Scale(game_state->paper->position, SPRITE_SIZE), WHITE);
-            break;
-
-        default:
-            break;
-        }
+        draw_gameplay_screen(gameplay_screen, global_state);
 
         EndDrawing();
     }
 
-    free(game_state->paper);
-    game_state->paper = NULL;
-    free(game_state->map);
-    game_state->map = NULL;
-    free(game_state);
-    game_state = NULL;
+    free(global_state->map);
+    global_state->map = NULL;
+    free(global_state);
+    global_state = NULL;
+
+    free(gameplay_screen->paper);
+    gameplay_screen->paper = NULL;
+    free(gameplay_screen);
+    gameplay_screen = NULL;
 
     return 0;
 }

@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "game_state.h"
+#include "global_state.h"
 #include "map.h"
 #include "constants.h"
 
@@ -133,10 +133,10 @@ void init_map(uint16_t *map)
     map[118] = 0b0001111111111000;
 }
 
-void draw_map(GameState *const game_state)
+void draw_map(GlobalState *const global_state, float background_position)
 {
-    // float background_position = game_state->paper->position.y;
-    for (int i = game_state->background_position; i < game_state->background_position + 10; i++)
+    // float background_position = global_state->paper->position.y;
+    for (int i = background_position; i < background_position + 10; i++)
     {
         /*
             using a u_int32_t here so that bits
@@ -147,7 +147,7 @@ void draw_map(GameState *const game_state)
         {
             return;
         }
-        uint32_t currentRow = game_state->map[i];
+        uint32_t currentRow = global_state->map[i];
         for (unsigned int j = 0; j < MAP_WIDTH; j++)
         {
             /*
@@ -171,7 +171,7 @@ void draw_map(GameState *const game_state)
                 Rectangle ground_to_draw = {8 * SPRITE_SIZE, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
                 Vector2 tile_position = {
                     j * SPRITE_SIZE,
-                    i * SPRITE_SIZE - game_state->background_position * SPRITE_SIZE};
+                    i * SPRITE_SIZE - background_position * SPRITE_SIZE};
 
                 // don't draw corner tiles on the edge of the screen
                 if (j != 0 && j != MAP_WIDTH - 1)
@@ -189,7 +189,7 @@ void draw_map(GameState *const game_state)
                     }
                 }
 
-                DrawTextureRec(*game_state->sprite_sheet, ground_to_draw, tile_position, WHITE);
+                DrawTextureRec(*global_state->sprite_sheet, ground_to_draw, tile_position, WHITE);
             }
 
             // bit shift currentRow to the left, so the bit to the right will be drawn
