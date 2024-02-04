@@ -5,10 +5,11 @@
 #include <stdio.h>
 #include <raymath.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 void init_gameplay_screen(GameplayScreen *const dest)
 {
-    dest->background_position = 0;
+    dest->background_position = 0.0f;
     dest->crash_flag = 0;
 
     Paper *paper = malloc(sizeof(Paper));
@@ -54,5 +55,15 @@ void update_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *
     if (IsKeyPressed(KEY_ENTER) && gameplay_screen->crash_flag)
     {
         reinit_gameplay_screen(gameplay_screen);
+    }
+
+    if (IsKeyPressed(KEY_ESCAPE)) {
+        free(gameplay_screen->paper);
+        gameplay_screen->paper = NULL;
+
+        free(gameplay_screen);
+
+        global_state->is_screen_changing = true;
+        global_state->game_screen = TITLE;
     }
 }

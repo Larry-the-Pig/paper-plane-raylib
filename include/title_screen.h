@@ -1,18 +1,18 @@
 #ifndef TITLE_SCREEN_H
 #define TITLE_SCREEN_H
-/*#include "global_state.h"
+#include "global_state.h"
 
+// for future use
 typedef struct TitleScreen
 {
-    Paper* paper;
-    int crash_flag;
-    float background_position;
+    int selected_button;
 } TitleScreen;
 
-void init_title_screen();
+// also for future use
+// void init_title_screen();
 
-void update_title_screen();
+void update_title_screen(GlobalState* const global_state);
 
-void draw_title_screen(GlobalState* const global_state);*/
+void draw_title_screen();
 
 #endif

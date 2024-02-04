@@ -2,6 +2,7 @@
 #define GAME_STATE_H
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "global_state.h"
 #include "screens.h"
 
@@ -10,6 +11,7 @@ typedef struct GlobalState {
     Texture2D* background;
     GameScreen game_screen;
     float delta_time;
+    bool is_screen_changing;
     uint16_t* map;
 } GlobalState;
 
