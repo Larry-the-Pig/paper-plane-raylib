@@ -19,7 +19,7 @@
 #define WINDOW_HEIGHT 10 * SPRITE_SIZE
 #define WINDOW_NAME "Paper Plane"
 
-int main()
+int main(void)
 {
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
     SetExitKey(KEY_NULL);

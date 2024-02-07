@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void draw_title_screen()
+void draw_title_screen(void)
 {
     ClearBackground(WHITE);
     DrawText("Paper Plane", 15, 15, 36, BLACK);
