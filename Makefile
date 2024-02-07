@@ -15,6 +15,9 @@ OBJ = $(SRC:.c=.o)
 
 all: paper
 
+debug: CFLAGS += -g3 -O3
+debug: paper
+
 paper: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 

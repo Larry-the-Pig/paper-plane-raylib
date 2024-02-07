@@ -36,6 +36,7 @@ Build:
 
 ```bash
 make RAYLIB=/path/to/raylib/binary/ RAYLIBINC=/path/to/raylib/header/ -jN # builds the application, N is the number of jobs to use.
+make debug RAYLIB=/path/to/raylib/binary/ RAYLIBINC=/path/to/raylib/header/ -jN # build using debug symbols and optimizations
 ```
 
 Run:
