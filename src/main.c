@@ -15,7 +15,7 @@
 
 #define FPS 60
 
-#define WINDOW_WIDTH MAP_WIDTH * SPRITE_SIZE
+#define WINDOW_WIDTH MAP_WIDTH *SPRITE_SIZE
 #define WINDOW_HEIGHT 10 * SPRITE_SIZE
 #define WINDOW_NAME "Paper Plane"
 
@@ -25,7 +25,7 @@ int main()
     InitWindow(WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2, WINDOW_NAME);
     SetExitKey(KEY_NULL);
 
-    Camera2D cam = { 0 };
+    Camera2D cam = {0};
     cam.zoom = GetScreenWidth() / WINDOW_WIDTH;
 
     Texture2D sprite_sheet = LoadTexture("assets/sheet.png");
@@ -72,23 +72,19 @@ int main()
             }
         }
 
-        
-
-        
-
         BeginDrawing();
 
         BeginMode2D(cam);
 
-		DrawLine(0, 100, WINDOW_WIDTH, 100, RED);
-		DrawText(TextFormat("%0.0f units", WINDOW_WIDTH), WINDOW_WIDTH / 2, 100, 20, MAROON);
+        DrawLine(0, 100, WINDOW_WIDTH, 100, RED);
+        DrawText(TextFormat("%0.0f units", WINDOW_WIDTH), WINDOW_WIDTH / 2, 100, 20, MAROON);
 
-		DrawCircle(200, 200, 50, PURPLE);
+        DrawCircle(200, 200, 50, PURPLE);
 
-		Vector2 worldspaceCursor = GetScreenToWorld2D(GetMousePosition(), cam);
-		DrawText(TextFormat("World Space X%0.0f Y%0.0f", worldspaceCursor.x, worldspaceCursor.y), worldspaceCursor.x, worldspaceCursor.y - 10, 10, YELLOW);
+        Vector2 worldspaceCursor = GetScreenToWorld2D(GetMousePosition(), cam);
+        DrawText(TextFormat("World Space X%0.0f Y%0.0f", worldspaceCursor.x, worldspaceCursor.y), worldspaceCursor.x, worldspaceCursor.y - 10, 10, YELLOW);
 
-		EndMode2D();
+        EndMode2D();
 
         switch (global_state->game_screen)
         {
