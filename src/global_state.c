@@ -15,7 +15,7 @@ void global_state_init(GlobalState *const global_state, Texture2D *sprite_sheet,
     global_state->is_screen_changing = true;
 
     uint16_t *map = malloc(sizeof(uint16_t) * MAP_HEIGHT);
-    init_map(map);
+    map_init(map);
 
     global_state->map = map;
 }

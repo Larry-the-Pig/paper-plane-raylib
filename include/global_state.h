@@ -15,6 +15,6 @@ typedef struct GlobalState {
     uint16_t* map;
 } GlobalState;
 
-void global_state_init(GlobalState* const global_state, Texture2D* sprite_sheet, Texture2D *background);
+void global_state_init(GlobalState* const, Texture2D*, Texture2D*);
 
 #endif

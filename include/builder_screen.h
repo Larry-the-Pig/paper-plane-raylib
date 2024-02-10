@@ -7,10 +7,10 @@ typedef struct BuilderScreen
     float scroll_position;
 } BuilderScreen;
 
-void init_builder_screen(BuilderScreen *const builder_screen);
+void builder_screen_init(BuilderScreen *const);
 
-void update_builder_screen(BuilderScreen *const builder_screen, GlobalState *const global_state);
+void builder_screen_update(BuilderScreen *const, GlobalState *const);
 
-void draw_builder_screen(BuilderScreen *const builder_screen, GlobalState *const global_state);
+void builder_screen_draw(BuilderScreen *const, GlobalState *const);
 
 #endif

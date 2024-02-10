@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void init_gameplay_screen(GameplayScreen *const dest)
+void gameplay_screen_init(GameplayScreen *const dest)
 {
     dest->background_position = 0.0f;
     dest->crash_flag = 0;
@@ -18,7 +18,7 @@ void init_gameplay_screen(GameplayScreen *const dest)
     dest->paper = paper;
 }
 
-void reinit_gameplay_screen(GameplayScreen *const dest)
+void gameplay_screen_reinit(GameplayScreen *const dest)
 {
     dest->background_position = 0;
     dest->crash_flag = 0;
@@ -26,26 +26,26 @@ void reinit_gameplay_screen(GameplayScreen *const dest)
     paper_init(dest->paper);
 }
 
-void draw_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *const global_state)
+void gameplay_screen_draw(GameplayScreen *const gameplay_screen, GlobalState *const global_state)
 {
     ClearBackground(WHITE);
     DrawTexture(*global_state->background, 0, 0, WHITE);
-    draw_map(global_state, gameplay_screen->background_position);
+    map_draw(global_state, gameplay_screen->background_position);
     DrawTextureRec(*global_state->sprite_sheet, gameplay_screen->paper->sprite_frame, Vector2Scale(gameplay_screen->paper->position, SPRITE_SIZE), WHITE);
 }
 
-void update_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *const global_state)
+void gameplay_screen_update(GameplayScreen *const gameplay_screen, GlobalState *const global_state)
 {
     if (!gameplay_screen->crash_flag)
     {
         if (IsKeyPressed(KEY_LEFT))
         {
-            rotate_left(gameplay_screen->paper);
+            paper_rotate_left(gameplay_screen->paper);
         }
 
         if (IsKeyPressed(KEY_RIGHT))
         {
-            rotate_right(gameplay_screen->paper);
+            paper_rotate_right(gameplay_screen->paper);
         }
 
         update_position(gameplay_screen, global_state->delta_time);
@@ -54,7 +54,7 @@ void update_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *
 
     if (IsKeyPressed(KEY_ENTER) && gameplay_screen->crash_flag)
     {
-        reinit_gameplay_screen(gameplay_screen);
+        gameplay_screen_reinit(gameplay_screen);
     }
 
     if (IsKeyPressed(KEY_ESCAPE)) {

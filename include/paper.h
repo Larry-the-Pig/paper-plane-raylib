@@ -23,13 +23,13 @@ typedef struct Paper {
     int rotation;
 } Paper;
 
-void update_sprite_rotation(Paper* dest);
+void paper_update_sprite_rotation(Paper*);
 
-void rotate_left(Paper* dest);
+void paper_rotate_left(Paper*);
 
-void rotate_right(Paper* dest);
+void paper_rotate_right(Paper*);
 
-void paper_init(Paper* dest);
+void paper_init(Paper*);
 
 int get_gravity_from_rotation(int rotation);
 

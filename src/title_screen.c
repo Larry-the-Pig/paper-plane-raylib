@@ -5,14 +5,14 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void draw_title_screen()
+void title_screen_draw(void)
 {
     ClearBackground(WHITE);
     DrawText("Paper Plane", 15, 15, 36, BLACK);
     DrawText("Press Enter", 15, 15 + 36 + 15, 36, BLACK);
 }
 
-void update_title_screen(GlobalState *const dest)
+void title_screen_update(GlobalState *const dest)
 {
     if (IsKeyPressed(KEY_ENTER)) {
         dest->game_screen = GAMEPLAY;

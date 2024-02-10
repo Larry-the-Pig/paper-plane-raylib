@@ -6,8 +6,8 @@
 #define MAP_WIDTH 16
 #define MAP_HEIGHT 119
 
-void init_map(uint16_t* map);
+void map_init(uint16_t*);
 
-void draw_map(GlobalState* const global_state, float background_position);
+void map_draw(GlobalState* const, float);
 
 #endif

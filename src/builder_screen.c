@@ -10,7 +10,7 @@
 
 #define SCROLL_SPEED 0.5
 
-void update_builder_screen(BuilderScreen *const builder_screen, GlobalState *const global_state)
+void builder_screen_update(BuilderScreen *const builder_screen, GlobalState *const global_state)
 {
     builder_screen->scroll_position -= (GetMouseWheelMove() * SCROLL_SPEED);
 
@@ -41,14 +41,14 @@ void update_builder_screen(BuilderScreen *const builder_screen, GlobalState *con
     }
 }
 
-void draw_builder_screen(BuilderScreen *const builder_screen, GlobalState *const global_state)
+void builder_screen_draw(BuilderScreen *const builder_screen, GlobalState *const global_state)
 {
     ClearBackground(WHITE);
     DrawTexture(*global_state->background, 0, 0, WHITE);
-    draw_map(global_state, builder_screen->scroll_position);
+    map_draw(global_state, builder_screen->scroll_position);
 }
 
-void init_builder_screen(BuilderScreen *const builder_screen)
+void builder_screen_init(BuilderScreen *const builder_screen)
 {
     builder_screen->scroll_position = 0.0f;
 }

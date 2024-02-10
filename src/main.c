@@ -51,19 +51,19 @@ int main()
             {
             case TITLE:
                 // title_screen = malloc(sizeof(TitleScreen));
-                // init_title_screen();
+                // (\w+)_title_screen();
                 global_state->is_screen_changing = false;
                 break;
 
             case GAMEPLAY:
                 gameplay_screen = malloc(sizeof(GameplayScreen));
-                init_gameplay_screen(gameplay_screen);
+                gameplay_screen_init(gameplay_screen);
                 global_state->is_screen_changing = false;
                 break;
 
             case EDITOR:
                 builder_screen = malloc(sizeof(BuilderScreen));
-                init_builder_screen(builder_screen);
+                builder_screen_init(builder_screen);
                 global_state->is_screen_changing = false;
                 break;
 
@@ -89,15 +89,15 @@ int main()
         switch (global_state->game_screen)
         {
         case TITLE:
-            draw_title_screen();
+            title_screen_draw();
             break;
 
         case GAMEPLAY:
-            draw_gameplay_screen(gameplay_screen, global_state);
+            gameplay_screen_draw(gameplay_screen, global_state);
             break;
 
         case EDITOR:
-            draw_builder_screen(builder_screen, global_state);
+            builder_screen_draw(builder_screen, global_state);
             break;
 
         default:
@@ -109,15 +109,15 @@ int main()
         switch (global_state->game_screen)
         {
         case TITLE:
-            update_title_screen(global_state);
+            title_screen_update(global_state);
             break;
 
         case GAMEPLAY:
-            update_gameplay_screen(gameplay_screen, global_state);
+            gameplay_screen_update(gameplay_screen, global_state);
             break;
 
         case EDITOR:
-            update_builder_screen(builder_screen, global_state);
+            builder_screen_update(builder_screen, global_state);
             break;
 
         default:

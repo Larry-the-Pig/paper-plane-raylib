@@ -9,10 +9,10 @@ typedef struct TitleScreen
 } TitleScreen;
 
 // also for future use
-// void init_title_screen();
+// void title_screen_init();
 
-void update_title_screen(GlobalState* const global_state);
+void title_screen_update(GlobalState* const);
 
-void draw_title_screen();
+void title_screen_draw(void);
 
 #endif

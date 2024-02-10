@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void update_sprite_rotation(Paper* dest) {
+void paper_update_sprite_rotation(Paper* dest) {
     switch(dest->rotation) {
     case -3:
         dest->sprite_frame.x = 0 * SPRITE_SIZE;
@@ -34,16 +34,16 @@ void update_sprite_rotation(Paper* dest) {
     }
 }
 
-void rotate_left(Paper* dest) {
+void paper_rotate_left(Paper* dest) {
     if(dest->rotation > PAPER_MIN_ROTATION) dest->rotation--;
 
-    update_sprite_rotation(dest);
+    paper_update_sprite_rotation(dest);
 }
 
-void rotate_right(Paper* dest) {
+void paper_rotate_right(Paper* dest) {
     if(dest->rotation < PAPER_MAX_ROTATION) dest->rotation++;
 
-    update_sprite_rotation(dest);
+    paper_update_sprite_rotation(dest);
 }
 
 void paper_init(Paper* dest) {
@@ -55,7 +55,7 @@ void paper_init(Paper* dest) {
     dest->sprite_frame.height = SPRITE_SIZE;
     dest->rotation = 0;
 
-    update_sprite_rotation(dest);
+    paper_update_sprite_rotation(dest);
 }
 
 int get_gravity_from_rotation(int rotation) {

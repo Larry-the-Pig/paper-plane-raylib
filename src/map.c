@@ -3,7 +3,7 @@
 #include "map.h"
 #include "constants.h"
 
-void init_map(uint16_t *map)
+void map_init(uint16_t *map)
 {
     /*
         this is all the map data same as
@@ -133,7 +133,7 @@ void init_map(uint16_t *map)
     map[118] = 0b0001111111111000;
 }
 
-void draw_map(GlobalState *const global_state, float background_position)
+void map_draw(GlobalState *const global_state, float background_position)
 {
     // float background_position = global_state->paper->position.y;
     for (int i = background_position; i < background_position + 10; i++)

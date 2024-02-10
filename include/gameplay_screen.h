@@ -10,16 +10,16 @@ typedef struct GameplayScreen
     float background_position;
 } GameplayScreen;
 
-void init_gameplay_screen(GameplayScreen *const dest);
+void gameplay_screen_init(GameplayScreen *const);
 
-void reinit_gameplay_screen(GameplayScreen *const dest);
+void gameplay_screen_reinit(GameplayScreen *const);
 
-void draw_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *const global_state);
+void gameplay_screen_draw(GameplayScreen *const, GlobalState *const);
 
-void update_gameplay_screen(GameplayScreen *const gameplay_screen, GlobalState *const global_state);
+void gameplay_screen_update(GameplayScreen *const, GlobalState *const);
 
-void check_collision(GameplayScreen* const gameplay_state, GlobalState* const global_state);
+void check_collision(GameplayScreen* const, GlobalState* const);
 
-void update_position(GameplayScreen* const dest, float delta_time);
+void update_position(GameplayScreen* const, float);
 
 #endif
