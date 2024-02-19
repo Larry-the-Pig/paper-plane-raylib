@@ -1,5 +1,6 @@
 #include <stdlib.h>
-#include "types.h"
+#include <stdint.h>
+#include <stdbool.h>
 #include "global_state.h"
 #include "paper.h"
 #include "map.h"

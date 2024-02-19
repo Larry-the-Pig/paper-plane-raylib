@@ -1,5 +1,7 @@
 #include <stdlib.h>
-#include "types.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdint.h>
 #include <raylib.h>
 #include <raymath.h>
 #include <rlgl.h>

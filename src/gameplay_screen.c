@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <raymath.h>
 #include <stdlib.h>
-#include "types.h"
+#include <stdbool.h>
 
 void gameplay_screen_init(GameplayScreen *const dest)
 {
