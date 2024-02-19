@@ -2,17 +2,19 @@
 #define TITLE_SCREEN_H
 #include "global_state.h"
 
-// for future use
+#define MIN_BUTTON 0
+#define MAX_BUTTON 2
+
 typedef struct TitleScreen
 {
     int selected_button;
+    float background_position;
 } TitleScreen;
 
-// also for future use
-// void title_screen_init();
+void title_screen_update(TitleScreen* const, GlobalState* const);
 
-void title_screen_update(GlobalState* const);
+void title_screen_draw(TitleScreen* const, GlobalState *const);
 
-void title_screen_draw(void);
+void title_screen_init(TitleScreen* const);
 
 #endif

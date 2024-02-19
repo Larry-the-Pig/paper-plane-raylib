@@ -12,6 +12,7 @@ typedef struct GlobalState {
     GameScreen game_screen;
     float delta_time;
     bool is_screen_changing;
+    bool running;
     uint16_t* map;
 } GlobalState;
 

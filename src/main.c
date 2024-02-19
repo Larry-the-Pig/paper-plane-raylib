@@ -34,14 +34,15 @@ int main()
     GlobalState global_state;
     GlobalState *p_global_state = &global_state;
     GameplayScreen *gameplay_screen = NULL;
-    // TitleScreen *title_screen = NULL;
+    TitleScreen *title_screen = NULL;
     BuilderScreen *builder_screen = NULL;
     global_state_init(p_global_state, &sprite_sheet, &background);
 
     SetTargetFPS(FPS);
 
-    while (!WindowShouldClose())
+    while (global_state.running)
     {
+        global_state.running = !WindowShouldClose();
         global_state.delta_time = GetFrameTime();
 
         if (global_state.is_screen_changing)
@@ -49,8 +50,8 @@ int main()
             switch (global_state.game_screen)
             {
             case TITLE:
-                // title_screen = malloc(sizeof(TitleScreen));
-                // (\w+)_title_screen();
+                title_screen = malloc(sizeof(TitleScreen));
+                title_screen_init(title_screen);
                 global_state.is_screen_changing = false;
                 break;
 
@@ -88,7 +89,7 @@ int main()
         switch (global_state.game_screen)
         {
         case TITLE:
-            title_screen_draw();
+            title_screen_draw(title_screen, p_global_state);
             break;
 
         case GAMEPLAY:
@@ -103,14 +104,12 @@ int main()
             break;
         }
 
-        DrawFPS(10, 10);
-
         EndDrawing();
 
         switch (global_state.game_screen)
         {
         case TITLE:
-            title_screen_update(p_global_state);
+            title_screen_update(title_screen, p_global_state);
             break;
 
         case GAMEPLAY:
