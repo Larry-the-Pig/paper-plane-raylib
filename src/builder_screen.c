@@ -6,7 +6,7 @@
 #include <raylib.h>
 #include <raymath.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include "types.h"
 
 #define SCROLL_SPEED 0.5
 

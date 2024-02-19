@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "types.h"
 #include "global_state.h"
 #include "map.h"
 #include "constants.h"

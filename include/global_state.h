@@ -1,8 +1,7 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-#include <stdint.h>
-#include <stdbool.h>
+#include "types.h"
 #include "global_state.h"
 #include "screens.h"
 

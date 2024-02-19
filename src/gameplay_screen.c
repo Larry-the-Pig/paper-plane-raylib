@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <raymath.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include "types.h"
 
 void gameplay_screen_init(GameplayScreen *const dest)
 {
@@ -28,8 +28,8 @@ void gameplay_screen_reinit(GameplayScreen *const dest)
 
 void gameplay_screen_draw(GameplayScreen *const gameplay_screen, GlobalState *const global_state)
 {
-    ClearBackground(WHITE);
-    DrawTexture(*global_state->background, 0, 0, WHITE);
+    ClearBackground(SKYBLUE);
+    //DrawTexture(*global_state->background, 0, 0, WHITE);
     map_draw(global_state, gameplay_screen->background_position);
     DrawTextureRec(*global_state->sprite_sheet, gameplay_screen->paper->sprite_frame, Vector2Scale(gameplay_screen->paper->position, SPRITE_SIZE), WHITE);
 }

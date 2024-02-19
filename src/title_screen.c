@@ -2,7 +2,7 @@
 #include "global_state.h"
 #include "screens.h"
 #include <raylib.h>
-#include <stdbool.h>
+#include "types.h"
 #include <stdio.h>
 
 void title_screen_draw(void)

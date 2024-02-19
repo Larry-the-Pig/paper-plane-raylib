@@ -1,6 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
-#include <stdint.h>
+#include "types.h"
 #include "global_state.h"
 
 #define MAP_WIDTH 16

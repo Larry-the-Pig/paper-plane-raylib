@@ -1,7 +1,5 @@
 #include <stdlib.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdint.h>
+#include "types.h"
 #include <raylib.h>
 #include <raymath.h>
 #include <rlgl.h>
@@ -13,7 +11,7 @@
 #include "title_screen.h"
 #include "builder_screen.h"
 
-#define FPS 60
+#define FPS 165
 
 #define WINDOW_WIDTH MAP_WIDTH *SPRITE_SIZE
 #define WINDOW_HEIGHT 10 * SPRITE_SIZE
@@ -22,7 +20,7 @@
 int main()
 {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2, WINDOW_NAME);
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
     SetExitKey(KEY_NULL);
 
     Camera2D cam = {0};
@@ -31,40 +29,39 @@ int main()
     Texture2D sprite_sheet = LoadTexture("assets/sheet.png");
     Texture2D background = LoadTexture("assets/background.png");
 
-    // Rectangle test = {0.0f, 0.0f, SPRITE_SIZE, SPRITE_SIZE};
-
-    GlobalState *global_state = malloc(sizeof(GlobalState));
+    GlobalState global_state;
+    GlobalState *p_global_state = &global_state;
     GameplayScreen *gameplay_screen = NULL;
     // TitleScreen *title_screen = NULL;
     BuilderScreen *builder_screen = NULL;
-    global_state_init(global_state, &sprite_sheet, &background);
+    global_state_init(p_global_state, &sprite_sheet, &background);
 
     SetTargetFPS(FPS);
 
     while (!WindowShouldClose())
     {
-        global_state->delta_time = GetFrameTime();
+        global_state.delta_time = GetFrameTime();
 
-        if (global_state->is_screen_changing)
+        if (global_state.is_screen_changing)
         {
-            switch (global_state->game_screen)
+            switch (global_state.game_screen)
             {
             case TITLE:
                 // title_screen = malloc(sizeof(TitleScreen));
                 // (\w+)_title_screen();
-                global_state->is_screen_changing = false;
+                global_state.is_screen_changing = false;
                 break;
 
             case GAMEPLAY:
                 gameplay_screen = malloc(sizeof(GameplayScreen));
                 gameplay_screen_init(gameplay_screen);
-                global_state->is_screen_changing = false;
+                global_state.is_screen_changing = false;
                 break;
 
             case EDITOR:
                 builder_screen = malloc(sizeof(BuilderScreen));
                 builder_screen_init(builder_screen);
-                global_state->is_screen_changing = false;
+                global_state.is_screen_changing = false;
                 break;
 
             default:
@@ -86,49 +83,46 @@ int main()
 
         EndMode2D();
 
-        switch (global_state->game_screen)
+        switch (global_state.game_screen)
         {
         case TITLE:
             title_screen_draw();
             break;
 
         case GAMEPLAY:
-            gameplay_screen_draw(gameplay_screen, global_state);
+            gameplay_screen_draw(gameplay_screen, p_global_state);
             break;
 
         case EDITOR:
-            builder_screen_draw(builder_screen, global_state);
+            builder_screen_draw(builder_screen, p_global_state);
             break;
 
         default:
             break;
         }
 
+        DrawFPS(10, 10);
+
         EndDrawing();
 
-        switch (global_state->game_screen)
+        switch (global_state.game_screen)
         {
         case TITLE:
-            title_screen_update(global_state);
+            title_screen_update(p_global_state);
             break;
 
         case GAMEPLAY:
-            gameplay_screen_update(gameplay_screen, global_state);
+            gameplay_screen_update(gameplay_screen, p_global_state);
             break;
 
         case EDITOR:
-            builder_screen_update(builder_screen, global_state);
+            builder_screen_update(builder_screen, p_global_state);
             break;
 
         default:
             break;
         }
     }
-
-    free(global_state->map);
-    global_state->map = NULL;
-    free(global_state);
-    global_state = NULL;
 
     return 0;
 }
