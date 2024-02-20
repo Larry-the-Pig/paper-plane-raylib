@@ -1,6 +1,7 @@
 #include "title_screen.h"
 #include "global_state.h"
 #include "screens.h"
+#include "constants.h"
 #include "map.h"
 #include <raylib.h>
 #include <stdbool.h>
@@ -64,6 +65,10 @@ void title_screen_update(TitleScreen *const title_screen, GlobalState *const gam
     }
 
     title_screen->background_position += game_state->delta_time;
+
+    if (title_screen->background_position > MAP_HEIGHT) {
+        title_screen->background_position = -10;
+    }
 }
 
 void title_screen_init(TitleScreen *const dest)

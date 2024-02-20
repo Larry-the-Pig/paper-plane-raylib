@@ -144,9 +144,9 @@ void map_draw(GlobalState *const global_state, float background_position)
             that have been shifted out can still
             be read.
         */
-        if (i > MAP_HEIGHT - 1)
+        if (i > MAP_HEIGHT - 1 || i < 0)
         {
-            return;
+            continue;
         }
         uint32_t currentRow = global_state->map[i];
         for (unsigned int j = 0; j < MAP_WIDTH; j++)

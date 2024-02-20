@@ -125,5 +125,7 @@ int main()
         }
     }
 
+    free(p_global_state->map);
+
     return 0;
 }
