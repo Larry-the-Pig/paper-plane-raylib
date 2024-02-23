@@ -36,7 +36,7 @@ Build:
 
 ```bash
 make RAYLIB=/path/to/raylib/binary/ RAYLIBINC=/path/to/raylib/header/ -jN # builds the application, N is the number of jobs to use.
-make debug RAYLIB=/path/to/raylib/binary/ RAYLIBINC=/path/to/raylib/header/ -jN # build using debug symbols and optimizations
+make debug RAYLIB=/path/to/raylib/binary/ RAYLIBINC=/path/to/raylib/header/ -jN # build using debug symbols and debug optimizations
 ```
 
 Run:
@@ -44,6 +44,22 @@ Run:
 ```bash
 ./paper # run the executable you just built
 ```
+
+## State of the Game
+
+I'm pretty happy with the current state of the game.
+
+There are a few feature that could still be added, e.i.
+
+- Loading and saving maps from files
+
+- Mouse support for menus
+
+- Changable spritesheets for different paper airplanes
+
+But I think these features don't really add to the game all that much.
+
+That being said if you want to add these things feel free to make a PR, and I will take a look at it.
 
 ## Credits
 
