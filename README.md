@@ -1,6 +1,6 @@
 # Paper Plane
 
-Port of [this game](https://ticalc.org/archives/files/fileinfo/341/34139.html) to the Flipper Zero.
+Port of [this game](https://ticalc.org/archives/files/fileinfo/341/34139.html) to the Raylib.
 
 ## Gameplay
 
